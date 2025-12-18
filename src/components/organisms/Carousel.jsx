@@ -1,13 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, useMotionValue, useTransform } from "motion/react";
-// replace icons with your own if needed
-import {
-  FiCircle,
-  FiCode,
-  FiFileText,
-  FiLayers,
-  FiLayout,
-} from "react-icons/fi";
 
 import "./Carousel.css";
 
@@ -16,31 +8,26 @@ const DEFAULT_ITEMS = [
     title: "Text Animations",
     description: "Cool text animations for your projects.",
     id: 1,
-    icon: <FiFileText className="carousel-icon" />,
   },
   {
     title: "Animations",
     description: "Smooth animations for your projects.",
     id: 2,
-    icon: <FiCircle className="carousel-icon" />,
   },
   {
     title: "Components",
     description: "Reusable components for your projects.",
     id: 3,
-    icon: <FiLayers className="carousel-icon" />,
   },
   {
     title: "Backgrounds",
     description: "Beautiful backgrounds and patterns for your projects.",
     id: 4,
-    icon: <FiLayout className="carousel-icon" />,
   },
   {
     title: "Common UI",
     description: "Common UI components are coming soon!",
     id: 5,
-    icon: <FiCode className="carousel-icon" />,
   },
 ];
 
@@ -69,7 +56,9 @@ function CarouselItem({
   return (
     <motion.div
       key={`${item?.id ?? index}-${index}`}
-      className={`carousel-item ${round ? "round" : ""}`}
+      className={`carousel-item bg-white dark:bg-black/50 ${
+        round ? "round" : ""
+      }`}
       style={{
         width: itemWidth,
         height: round ? itemWidth : "100%",
@@ -77,12 +66,37 @@ function CarouselItem({
         ...(round && { borderRadius: "50%" }),
       }}
       transition={transition}>
-      <div className={`carousel-item-header ${round ? "round" : ""}`}>
-        <span className="carousel-icon-container">{item.icon}</span>
-      </div>
-      <div className="carousel-item-content">
-        <div className="carousel-item-title">{item.title}</div>
-        <p className="carousel-item-description">{item.description}</p>
+      {/* <div className={`carousel-item-header ${round ? "round" : ""}`}>
+        <span className="carousel-icon-container">
+          {item?.imageSrc ? (
+            <img
+              src={item.imageSrc}
+              alt={item.imageAlt ?? ""}
+              className="carousel-icon-image"
+              loading="lazy"
+            />
+          ) : (
+            item.icon
+          )}
+        </span>
+      </div> */}
+      <div className="carousel-item-content flex items-end min-h-[200px] w-full h-full relative">
+        <div className="absolute top-0 left-0 w-full h-full">
+          {item?.imageSrc ? (
+            <img
+              src={item.imageSrc}
+              alt={item.imageAlt ?? ""}
+              loading="lazy"
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            item.icon
+          )}
+        </div>
+        <div className="relative z-10">
+          <div className="carousel-item-title">{item.title}</div>
+          <p className="carousel-item-description">{item.description}</p>
+        </div>
       </div>
     </motion.div>
   );
@@ -227,7 +241,7 @@ export default function Carousel({
   return (
     <div
       ref={containerRef}
-      className={`carousel-container ${round ? "round" : ""}`}
+      className={`carousel-container  ${round ? "round" : ""}`}
       style={{
         width: `${baseWidth}px`,
         ...(round && { height: `${baseWidth}px`, borderRadius: "50%" }),
