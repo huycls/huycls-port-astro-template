@@ -1,3 +1,22 @@
+---
+import Navbar from "../components/organisms/Navbar.astro"
+import {StaggeredMenu} from "@/components/organisms/StaggeredMenu"; 
+import "../styles/global.css";
+
+
+const menuItems = [
+  { label: 'Home', ariaLabel: 'Go to home page', link: '/' },
+  { label: 'About', ariaLabel: 'Learn about us', link: '/about' },
+  { label: 'Services', ariaLabel: 'View our services', link: '/services' },
+  { label: 'Contact', ariaLabel: 'Get in touch', link: '/contact' }
+];
+
+const socialItems = [
+  { label: 'Twitter', link: 'https://twitter.com' },
+  { label: 'GitHub', link: 'https://github.com' },
+  { label: 'LinkedIn', link: 'https://linkedin.com' }
+];
+---
 <!doctype html>
 <html lang="en">
 	<head>
@@ -5,7 +24,21 @@
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>HuyCLS</title>
+		<script is:inline>
+			(() => {
+				try {
+					const stored = localStorage.getItem("theme");
+					const prefersDark =
+						window.matchMedia &&
+						window.matchMedia("(prefers-color-scheme: dark)").matches;
+					const shouldBeDark = stored ? stored === "dark" : prefersDark;
+					document.documentElement.classList.toggle("dark", shouldBeDark);
+				} catch {
+					// no-op (e.g., privacy mode / disabled storage)
+				}
+			})();
+		</script>
 	</head>
 	<body>
 		<slot />

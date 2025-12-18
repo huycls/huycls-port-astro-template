@@ -1,0 +1,157 @@
+---
+import astroLogo from '../assets/astro.svg';
+import background from '../assets/background.svg';
+import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler"
+import {StaggeredMenu} from "@/components/organisms/StaggeredMenu"; 
+
+const menuItems = [
+  { label: 'Home', ariaLabel: 'Go to home page', link: '/' },
+  { label: 'About', ariaLabel: 'Learn about us', link: '/about' },
+  { label: 'Services', ariaLabel: 'View our services', link: '/services' },
+  { label: 'Contact', ariaLabel: 'Get in touch', link: '/contact' }
+];
+
+const socialItems = [
+  { label: 'Twitter', link: 'https://twitter.com' },
+  { label: 'GitHub', link: 'https://github.com' },
+  { label: 'LinkedIn', link: 'https://linkedin.com' }
+];
+
+const jobsList = [
+	{
+		name: "Thanh Tin Tech",
+		timeline: "2020 - 2022",
+		description: "test description",
+	},
+	{
+		name: "Gleads",
+		timeline: "2022 - Now",
+		description: "test description"
+	}
+]
+
+const projects = [
+	{
+		name: ""
+	}
+]
+
+---
+<div class="relative h-full">
+  <AnimatedThemeToggler client:load  />
+	<StaggeredMenu 
+		client:load
+		position="right"
+		items={menuItems}
+		socialItems={socialItems}
+		displaySocials={true}
+		displayItemNumbering={true}
+		menuButtonColor="#333333"
+		openMenuButtonColor="#333333"
+		changeMenuColorOnOpen={true}
+		colors={['#B19EEF', '#5227FF']}
+		logoUrl=""
+		accentColor="#ff6b6b"
+		/>
+<div id="container" class="absolute inset-0 w-full h-full">
+	<img id="background" src={background.src} alt="" fetchpriority="high" />
+	<main class="max-w-4xl p-10 mx-auto my-20 bg-white rounded-xl overflow-hidden relative">
+		<section id="hero">
+			<div class="flex">
+				<div>
+					<h1>Hi, I'm Huy Nguyen</h1>
+					<div class="mt-6 flex items-center gap-2">
+						<div class="green-dot"></div>
+						<p class="text-sm">Available for work</p>
+					</div>
+					<p class="mt-1 font-semibold">Frontend Developer</p>
+					<p class="mt-1 text-slate-500 font-semibold">Ho Chi Minh, Viet Nam</p>				
+				</div>
+				<div class="flex-none">
+				</div>
+			</div>
+		</section>
+		<section>
+			<h2>About</h2>
+			<p class="mt-6">I am a Frontend developer with a passion for building web
+              applications. I am a quick learner and I am always looking to
+              improve my skills.</p>
+		</section>
+		<section>
+			<h2>Work Experiences:</h2>
+			<div class="flex flex-col mt-10 lg:gap-12 gap-6">
+				{jobsList?.map((item) => (
+					<div class="flex">
+						<div class="w-1/4 flex">
+						<div class="timeline-dot flex-none timeline-line"></div>
+						<div class="-ml-4 -mt-6 pl-6 border-b pb-2 w-full border-slate-500 h-fit">{item.timeline}</div></div> 
+						<div class="w-3/4 pl-4">
+							<p class="font-semibold text-xl mb-6">{item.name}</p>
+							<p>{item.description}</p>
+						</div>
+					</div>
+				))}
+			</div>
+		</section>
+		<section>
+			<h2>Projects:</h2>
+			<div>
+
+			</div>
+		</section>
+	</main>
+</div></div>
+<style>
+	#background {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+		filter: blur(100px);
+	}
+
+	#container {
+		font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
+		height: 100%;
+	}
+
+	main {
+		height: 100%;
+		justify-content: center;
+		overflow-x:hidden;
+	}
+	h1{
+		font-size: 36px;
+		line-height: 44px;
+		font-weight: 700;
+	}
+	h2{
+		font-size: 24px;
+		line-height: 32px;
+		font-weight: 600;
+	}
+	.timeline-dot{
+		width: 20px;
+		height: 20px;
+		border-radius: 9999px;
+		background: #333333;
+	}
+	.green-dot{
+		background: #06d51b;
+		width: 10px;
+		height: 10px;
+		border-radius: 50%;
+	}
+	.timeline-line{
+		position:relative;
+	}
+	.timeline-line(not:last-child)::after{
+		position: absolute;
+		left: 24px;
+		top: 12px;
+		height: 100px;
+		width: 1px;
+	}
+</style>
