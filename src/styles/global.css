@@ -288,6 +288,11 @@ body {
   z-index: 10;
 }
 
+/* Ẩn panel mặc định khi React chưa hydrate (tránh FOUC) */
+.staggered-menu-panel[aria-hidden="true"] {
+  display: none !important;
+}
+
 [data-position="left"] .staggered-menu-panel {
   right: auto;
   left: 0;
@@ -301,6 +306,11 @@ body {
   width: clamp(260px, 38vw, 420px);
   pointer-events: none;
   z-index: 5;
+}
+
+/* Ẩn prelayers mặc định khi menu chưa mở (tránh FOUC) */
+.staggered-menu-wrapper:not([data-open]) .sm-prelayers {
+  display: none !important;
 }
 
 [data-position="left"] .sm-prelayers {

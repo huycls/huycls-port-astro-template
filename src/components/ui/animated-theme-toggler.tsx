@@ -16,7 +16,7 @@ export const AnimatedThemeToggler = ({
   duration = 400,
   ...props
 }: AnimatedThemeTogglerProps) => {
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(true);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -75,7 +75,10 @@ export const AnimatedThemeToggler = ({
     <button
       ref={buttonRef}
       onClick={toggleTheme}
-      className={cn(className, "cursor-pointer absolute right-40 top-7 z-100")}
+      className={cn(
+        className,
+        "cursor-pointer dark:text-white text-[#333333] absolute right-40 top-7 z-100"
+      )}
       {...props}>
       {isDark ? <Sun /> : <Moon />}
       <span className="sr-only">Toggle theme</span>

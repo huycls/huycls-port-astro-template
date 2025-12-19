@@ -455,7 +455,7 @@ export const StaggeredMenu = ({
         </div>
         <button
           ref={toggleBtnRef}
-          className="sm-toggle light:text-black dark:text-white"
+          className="sm-toggle text-[#333333] dark:text-white"
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           aria-controls="staggered-menu-panel"
@@ -497,7 +497,7 @@ export const StaggeredMenu = ({
         id="staggered-menu-panel"
         ref={panelRef}
         className="staggered-menu-panel"
-        aria-hidden={!open}>
+        aria-hidden={open ? undefined : "true"}>
         <div className="sm-panel-inner">
           <ul
             className="sm-panel-list"
@@ -558,3 +558,20 @@ export const StaggeredMenu = ({
 };
 
 export default StaggeredMenu;
+
+{
+  /* <StaggeredMenu 
+		client:load
+		position="right"
+		items={menuItems}
+		socialItems={socialItems}
+		displaySocials={true}
+		displayItemNumbering={true}
+		menuButtonColor="#333333"
+		openMenuButtonColor="#fff"
+		changeMenuColorOnOpen={true}
+		colors={['#B19EEF', '#5227FF']}
+		logoUrl=""
+		accentColor="#ff6b6b"
+		/> */
+}

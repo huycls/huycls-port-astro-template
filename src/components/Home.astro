@@ -2,7 +2,8 @@
 import astroLogo from '../assets/astro.svg';
 import background from '../assets/background.svg';
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler"
-import {StaggeredMenu} from "@/components/organisms/StaggeredMenu"; 
+import {StaggeredMenu} from "@/components/organisms/StaggeredMenu";
+import { TimeDisplay } from "@/components/ui/TimeDisplay"; 
 
 const menuItems = [
   { label: 'Home', ariaLabel: 'Go to home page', link: '/' },
@@ -12,29 +13,143 @@ const menuItems = [
 ];
 
 const socialItems = [
-  { label: 'Twitter', link: 'https://twitter.com' },
-  { label: 'GitHub', link: 'https://github.com' },
-  { label: 'LinkedIn', link: 'https://linkedin.com' }
+	{ label: 'Twitter', link: 'https://twitter.com' },
+	{ label: 'GitHub', link: 'https://github.com' },
+	{ label: 'LinkedIn', link: 'https://linkedin.com' }
+];
+
+// Optional: Notes/Writing section data
+const notes = [
+	{
+		title: "Understanding React Server Components",
+		description: "Deep dive into RSC and how they improve performance",
+		date: "2024-01-15",
+		link: "#"
+	},
+	{
+		title: "Next.js 14 App Router Best Practices",
+		description: "Lessons learned from building production apps",
+		date: "2024-01-10",
+		link: "#"
+	},
+	{
+		title: "Performance Optimization Techniques",
+		description: "Real-world strategies for faster web apps",
+		date: "2024-01-05",
+		link: "#"
+	}
+];
+
+const contactInfo = {
+	email: "huy@example.com",
+	github: "https://github.com/yourusername",
+	linkedin: "https://linkedin.com/in/yourusername"
+};
+
+const caseStudies = [
+	{
+		title: "Gleads Platform - Performance & UX Optimization",
+		context: "The platform was experiencing slow load times (3-5s) and poor mobile experience, leading to high bounce rates and user complaints. The legacy codebase had performance bottlenecks in data fetching and rendering.",
+		solution: "Implemented Next.js App Router with React Server Components, moved heavy computations to server-side, added incremental static regeneration (ISR) for frequently accessed pages, and optimized images with next/image. Implemented code splitting and lazy loading for non-critical components.",
+		techChoices: [
+			{ tech: "Next.js 14 App Router", reason: "Server-side rendering and ISR for better performance" },
+			{ tech: "React Server Components", reason: "Reduce client-side JavaScript bundle size" },
+			{ tech: "React Query", reason: "Efficient data fetching with caching and background updates" },
+			{ tech: "TailwindCSS", reason: "Faster development and smaller CSS bundle" }
+		],
+		result: {
+			performance: "Load time reduced from 3-5s to 0.8-1.2s (60% improvement), Lighthouse score improved from 45 to 92",
+			ux: "Mobile responsiveness score increased to 100%, user engagement increased by 35%",
+			feedback: "Positive feedback from users on faster page loads and smoother interactions"
+		}
+	},
+	{
+		title: "BBCIncorp Dashboard - Scalable Architecture",
+		context: "The existing dashboard couldn't handle growing data volume and user base. Real-time updates were slow, and the UI became unresponsive with large datasets. Needed a solution that could scale without major refactoring.",
+		solution: "Redesigned state management with Redux Toolkit for predictable updates, implemented virtual scrolling for large lists, added WebSocket connections for real-time data, and created a modular component architecture for easier maintenance.",
+		techChoices: [
+			{ tech: "Redux Toolkit", reason: "Simplified state management with better performance" },
+			{ tech: "React Window", reason: "Virtual scrolling for rendering thousands of items efficiently" },
+			{ tech: "WebSocket", reason: "Real-time updates without polling overhead" },
+			{ tech: "TypeScript", reason: "Type safety and better developer experience" }
+		],
+		result: {
+			performance: "Dashboard handles 10K+ items smoothly, initial render time reduced by 50%",
+			ux: "Real-time updates with <100ms latency, improved user satisfaction scores",
+			feedback: "Development team reported easier maintenance and faster feature development"
+		}
+	}
 ];
 
 const jobsList = [
 	{
-		name: "Thanh Tin Tech",
-		timeline: "2020 - 2022",
-		description: "test description",
+		name: "Gleads",
+		role: "Frontend Developer",
+		time: "2022 - Now",
+		bullets: [
+			"Built scalable Next.js applications with TypeScript, Redux, and TailwindCSS",
+			"Optimized performance reducing load time by 40% through code splitting and lazy loading",
+			"Improved UX with responsive design and accessibility (WCAG 2.1 AA compliance)"
+		]
 	},
 	{
-		name: "Gleads",
-		timeline: "2022 - Now",
-		description: "test description"
+		name: "Thanh Tin Tech",
+		role: "Frontend Developer",
+		time: "2020 - 2022",
+		bullets: [
+			"Developed React-based web applications with modern state management",
+			"Solved complex UI/UX challenges improving user engagement by 25%",
+			"Scaled applications to handle 10K+ concurrent users with optimized rendering"
+		]
 	}
 ]
+
+const skills = [
+	{
+		category: "Frontend",
+		items: [
+			{ name: "React", description: "Component-based UI library" },
+			{ name: "Next.js", description: "React framework for production" },
+			{ name: "TypeScript", description: "Typed JavaScript" },
+			{ name: "TailwindCSS", description: "Utility-first CSS framework" },
+			{ name: "CSS Modules", description: "Scoped CSS styling" },
+		],
+	},
+	{
+		category: "State / Data",
+		items: [
+			{ name: "Redux", description: "State management library" },
+			{ name: "React Query", description: "Server state management" },
+			{ name: "SWR", description: "Data fetching & caching" },
+		],
+	},
+	{
+		category: "Tooling",
+		items: [
+			{ name: "Git", description: "Version control" },
+			{ name: "Vite", description: "Build tool & dev server" },
+			{ name: "ESLint", description: "Code linting" },
+			{ name: "Prettier", description: "Code formatting" },
+			{ name: "Figma", description: "Design collaboration" },
+		],
+	},
+	{
+		category: "Quality",
+		items: [
+			{ name: "Performance optimization", description: "Fast & efficient apps" },
+			{ name: "Responsive design", description: "Mobile-first approach" },
+			{ name: "Accessibility (a11y)", description: "Inclusive user experience" },
+		],
+	},
+];
 
 const projects = [
 	{
 		name: "Gleads",
 		techUsed: "#nextjs, #redux, #tailwind",
 		description: "The Audit app automatically runs a series of audits on the current page, checking for the most common performance and accessibility issues. When an issue is found, a red dot will appear in the toolbar. Clicking on the app will pop up a list of results from the audit and will highlight the related elements directly in the page.",
+		liveDemo: "https://gleads.example.com",
+		github: "https://github.com/yourusername/gleads",
 		listImages: [
 			{
 				src: "/pexels-francesco-ungaro-2325447.jpg",
@@ -52,6 +167,46 @@ const projects = [
 		name: "BBCIncorp",
 		techUsed: "#nextjs, #redux, #tailwind",
 		description: "The Audit app automatically runs a series of audits on the current page, checking for the most common performance and accessibility issues. When an issue is found, a red dot will appear in the toolbar. Clicking on the app will pop up a list of results from the audit and will highlight the related elements directly in the page.",
+		liveDemo: "https://bbcinorp.example.com",
+		github: "https://github.com/yourusername/bbcinorp",
+		listImages: [
+			{
+				src: "/pexels-francesco-ungaro-2325447.jpg",
+				alt: "images"
+			},{
+				src: "/pexels-pixabay-158063.jpg",
+				alt: "images"
+			},{
+				src: "/pexels-pixabay-247599.jpg",
+				alt: "images"
+			}
+		]
+	},
+	{
+		name: "Gleads",
+		techUsed: "#nextjs, #redux, #tailwind",
+		description: "The Audit app automatically runs a series of audits on the current page, checking for the most common performance and accessibility issues. When an issue is found, a red dot will appear in the toolbar. Clicking on the app will pop up a list of results from the audit and will highlight the related elements directly in the page.",
+		liveDemo: "https://gleads.example.com",
+		github: "https://github.com/yourusername/gleads",
+		listImages: [
+			{
+				src: "/pexels-francesco-ungaro-2325447.jpg",
+				alt: "images"
+			},{
+				src: "/pexels-pixabay-158063.jpg",
+				alt: "images"
+			},{
+				src: "/pexels-pixabay-247599.jpg",
+				alt: "images"
+			}
+		]
+	},
+	{
+		name: "BBCIncorp",
+		techUsed: "#nextjs, #redux, #tailwind",
+		description: "The Audit app automatically runs a series of audits on the current page, checking for the most common performance and accessibility issues. When an issue is found, a red dot will appear in the toolbar. Clicking on the app will pop up a list of results from the audit and will highlight the related elements directly in the page.",
+		liveDemo: "https://bbcinorp.example.com",
+		github: "https://github.com/yourusername/bbcinorp",
 		listImages: [
 			{
 				src: "/pexels-francesco-ungaro-2325447.jpg",
@@ -67,28 +222,17 @@ const projects = [
 	}
 ]
 
+
+
 ---
 <div class="relative h-full">
   <AnimatedThemeToggler client:load  />
-	<StaggeredMenu 
-		client:load
-		position="right"
-		items={menuItems}
-		socialItems={socialItems}
-		displaySocials={true}
-		displayItemNumbering={true}
-		menuButtonColor="#333333"
-		openMenuButtonColor="#333333"
-		changeMenuColorOnOpen={true}
-		colors={['#B19EEF', '#5227FF']}
-		logoUrl=""
-		accentColor="#ff6b6b"
-		/>
+	
 <div id="container" class="absolute inset-0 w-full h-full">
 	<img id="background" src={background.src} alt="" fetchpriority="high" />
-	<main class="max-w-4xl p-10 mx-auto my-20 light:text-[#333333] dark:text-white dark:bg-black/50 bg-white rounded-xl overflow-hidden relative">
+	<main class="max-w-4xl p-10 mx-auto my-20 light:text-[#333333] dark:text-white dark:bg-[#0d1117] bg-white rounded-xl overflow-hidden relative">
 		<section id="hero">
-			<div class="flex">
+			<div class="flex justify-between">
 				<div>
 					<h1>Hi, I'm Huy Nguyen</h1>
 					<div class="mt-6 flex items-center gap-2">
@@ -96,78 +240,308 @@ const projects = [
 						<p class="text-sm">Available for work</p>
 					</div>
 					<p class="mt-1 font-semibold">Frontend Developer</p>
-					<p class="mt-1 text-slate-500 font-semibold">Ho Chi Minh, Viet Nam</p>				
+					<p class="mt-1 text-slate-500 font-semibold">Ho Chi Minh, Viet Nam</p>
+					<div class="mt-2">
+						<TimeDisplay client:load />
+					</div>				
 				</div>
 				<div class="flex-none">
+				<div class="rounded-lg p-4 border border-slate-400 w-[200px] h-auto">
+				<img src="/avatar-me-port.jpg" alt="avatar" class="rounded-lg" /></div>
 				</div>
 			</div>
 		</section>
 		<section>
-			<h2>About</h2>
-			<p class="mt-6">I am a Frontend developer with a passion for building web
-              applications. I am a quick learner and I am always looking to
-              improve my skills.</p>
+			<h2>About me</h2>
+			<p class="mt-6">I am a Full-Stack Developer dedicated to building scalable, high-performance web applications. My expertise lies in the Next.js and React ecosystem, where I create seamless user interfaces paired with robust backends using Node.js and Express. By leveraging MongoDB for flexible data management, I build end-to-end solutions that are not just functional, but optimized for growth and user experience.</p>
 		</section>
 		<section>
-			<h2>Work Experiences:</h2>
-			<div class="flex flex-col mt-10 lg:gap-12 gap-6">
-				{jobsList?.map((item) => (
-					<div class="flex">
-						<div class="w-1/4 flex">
-						<div class="timeline-dot flex-none timeline-line"></div>
-						<div class="-ml-4 -mt-6 pl-6 border-b pb-2 w-full border-slate-500 h-fit">{item.timeline}</div></div> 
-						<div class="w-3/4 pl-4">
-							<p class="font-semibold text-xl mb-6">{item.name}</p>
-							<p>{item.description}</p>
+			<h2>Skills</h2>
+			<div class="mt-6 space-y-8">
+				{skills.map((group) => (
+					<div class="skills-group">
+						<h3 class="text-lg font-semibold text-slate-900 dark:text-slate-100 mb-4">
+							{group.category}
+						</h3>
+						<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+							{group.items.map((skill) => (
+								<div class="skills-item group flex items-start gap-3 p-4 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/50 hover:border-slate-300 dark:hover:border-slate-600 hover:shadow-sm transition-all">
+									<div class="skills-icon flex-shrink-0 w-10 h-10 rounded-lg bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-lg group-hover:bg-slate-200 dark:group-hover:bg-slate-600 transition-colors">
+										{skill.name === "React" && "⚛️"}
+										{skill.name === "Next.js" && "▲"}
+										{skill.name === "TypeScript" && "📘"}
+										{skill.name === "TailwindCSS" && "🎨"}
+										{skill.name === "CSS Modules" && "💅"}
+										{skill.name === "Redux" && "🔄"}
+										{skill.name === "React Query" && "🔍"}
+										{skill.name === "SWR" && "⚡"}
+										{skill.name === "Git" && "📦"}
+										{skill.name === "Vite" && "⚡"}
+										{skill.name === "ESLint" && "🔍"}
+										{skill.name === "Prettier" && "✨"}
+										{skill.name === "Figma" && "🎨"}
+										{skill.name === "Performance optimization" && "🚀"}
+										{skill.name === "Responsive design" && "📱"}
+										{skill.name === "Accessibility (a11y)" && "♿"}
+										{!["React", "Next.js", "TypeScript", "TailwindCSS", "CSS Modules", "Redux", "React Query", "SWR", "Git", "Vite", "ESLint", "Prettier", "Figma", "Performance optimization", "Responsive design", "Accessibility (a11y)"].includes(skill.name) && "💼"}
+									</div>
+									<div class="flex-1 min-w-0">
+										<h4 class="font-medium text-slate-900 dark:text-slate-100 text-sm mb-1">
+											{skill.name}
+										</h4>
+										<p class="text-xs text-slate-600 dark:text-slate-400">
+											{skill.description}
+										</p>
+									</div>
+								</div>
+							))}
 						</div>
 					</div>
 				))}
 			</div>
 		</section>
 		<section>
-			<h2>Projects:</h2>
-			<div class="mt-6 grid gap-8 lg:grid-cols-2">
-				<div class="space-y-4">
-					<p class="text-slate-600">
-						Một vài dự án mình đã tham gia gần đây.
-					</p>
-					<ul class="space-y-4">
-						{projects.map((p) => (
-							<li class="rounded-lg border border-slate-200 p-4">
-								<div class="flex items-start justify-between gap-4">
-									<div>
-										<p class="font-semibold">{p.name}</p>
-										<p class="mt-1 text-sm text-slate-500">{p.techUsed}</p>
-									</div>
-									<span class="text-xs text-slate-400">
-										{p.listImages?.length ?? 0} ảnh
-									</span>
-								</div>
-								<p class="mt-3 text-sm text-slate-700 line-clamp-4">{p.description}</p>
-							</li>
-						))}
-					</ul>
-				</div>
-
-				<div class="rounded-xl border border-slate-200 p-4">
-					<div class="projects-carousel" aria-label="Project images carousel">
-						{projects.flatMap((p, pIdx) =>
-							p.listImages.map((img, i) => (
-								<figure class="projects-slide" key={`${p.name}-${pIdx}-${i}`}>
-									<img
-										class="projects-slide-img"
-										src={img.src}
-										alt={img.alt}
-										loading="lazy"
-									/>
-									<figcaption class="projects-slide-caption">
-										<p class="projects-slide-title">{p.name}</p>
-										<p class="projects-slide-subtitle">{p.techUsed}</p>
-									</figcaption>
-								</figure>
-							))
-						)}
+			<h2>Work Experience</h2>
+			<div class="mt-6 relative pl-8 border-l-2 border-slate-200 dark:border-slate-700">
+				{jobsList?.map((item, index) => (
+					<div class="relative mb-8 last:mb-0">
+						<div class="absolute -left-[29px] top-1 w-4 h-4 rounded-full bg-white dark:bg-[#06d51b] border-2 border-slate-300 dark:border-slate-600"></div>
+						<div class="pl-6">
+							<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2">
+								<h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100">
+									{item.name}
+								</h3>
+								<span class="text-sm text-slate-500 dark:text-slate-400 font-medium">
+									{item.time}
+								</span>
+							</div>
+							<p class="text-slate-600 dark:text-slate-400 mb-4">
+								{item.role}
+							</p>
+							<ul class="space-y-2">
+								{item.bullets.map((bullet) => (
+									<li class="flex items-start gap-2 text-slate-700 dark:text-slate-300">
+										<span class="text-slate-400 dark:text-slate-500 mt-1.5">•</span>
+										<span>{bullet}</span>
+									</li>
+								))}
+							</ul>
+						</div>
 					</div>
+				))}
+			</div>
+		</section>
+		<section>
+			<h2>Projects</h2>
+			<div class="mt-6 grid gap-4 sm:grid-cols-2">
+				{projects.map((project) => {
+					const techTags = project.techUsed
+						.split(',')
+						.map((tag) => tag.trim().replace('#', ''));
+					return (
+						<div class="github-project-card group block rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/50 overflow-hidden transition-all hover:border-slate-300 dark:hover:border-slate-600 hover:shadow-md">
+							<div class="github-project-thumbnail">
+								<img
+									src={project.listImages[0].src}
+									alt={project.listImages[0].alt}
+									class="w-full h-48 object-cover"
+									loading="lazy"
+								/>
+							</div>
+							<div class="p-4">
+								<div class="flex items-start justify-between gap-2 mb-2">
+									<h3 class="github-project-title font-semibold text-lg text-slate-900 dark:text-slate-100">
+										{project.name}
+									</h3>
+								</div>
+								<p class="github-project-description text-sm text-slate-600 dark:text-slate-400 line-clamp-2 mb-3">
+									{project.description}
+								</p>
+								<div class="flex flex-wrap gap-1.5 mb-4">
+									{techTags.map((tag) => (
+										<span class="github-project-tag inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">
+											{tag}
+										</span>
+									))}
+								</div>
+								<div class="flex gap-2 pt-2 border-t border-slate-200 dark:border-slate-700">
+									{project.liveDemo && (
+										<a
+											href={project.liveDemo}
+											target="_blank"
+											rel="noopener noreferrer"
+											class="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium rounded-lg bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-200 transition-colors">
+											<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+											</svg>
+											Live demo
+										</a>
+									)}
+									{project.github && (
+										<a
+											href={project.github}
+											target="_blank"
+											rel="noopener noreferrer"
+											class="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:border-slate-300 dark:hover:border-slate-600 transition-colors">
+											<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+												<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+											</svg>
+											GitHub
+										</a>
+									)}
+								</div>
+							</div>
+						</div>
+					);
+				})}
+			</div>
+		</section>
+
+		<section>
+			<h2>Case Studies</h2>
+			<p class="mt-2 text-slate-600 dark:text-slate-400">
+				Deep dive into how I approach problems, make technical decisions, and deliver results.
+			</p>
+			<div class="mt-6 space-y-8">
+				{caseStudies.map((study, index) => (
+					<article class="case-study-card rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/50 p-6 hover:border-slate-300 dark:hover:border-slate-600 hover:shadow-lg transition-all">
+						<h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100 mb-6">
+							{study.title}
+						</h3>
+						
+						<div class="space-y-6">
+							<div>
+								<h4 class="text-sm font-semibold text-slate-900 dark:text-slate-100 mb-2 flex items-center gap-2">
+									<span class="case-study-icon">📋</span>
+									Context
+								</h4>
+								<p class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+									{study.context}
+								</p>
+							</div>
+
+							<div>
+								<h4 class="text-sm font-semibold text-slate-900 dark:text-slate-100 mb-2 flex items-center gap-2">
+									<span class="case-study-icon">💡</span>
+									Solution
+								</h4>
+								<p class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+									{study.solution}
+								</p>
+							</div>
+
+							<div>
+								<h4 class="text-sm font-semibold text-slate-900 dark:text-slate-100 mb-3 flex items-center gap-2">
+									<span class="case-study-icon">⚙️</span>
+									Tech Choices
+								</h4>
+								<ul class="space-y-2">
+									{study.techChoices.map((choice) => (
+										<li class="text-sm text-slate-700 dark:text-slate-300">
+											<span class="font-medium text-slate-900 dark:text-slate-100">{choice.tech}:</span>
+											<span class="ml-2">{choice.reason}</span>
+										</li>
+									))}
+								</ul>
+							</div>
+
+							<div>
+								<h4 class="text-sm font-semibold text-slate-900 dark:text-slate-100 mb-3 flex items-center gap-2">
+									<span class="case-study-icon">📊</span>
+									Result
+								</h4>
+								<div class="space-y-2">
+									<div>
+										<span class="text-xs font-medium text-slate-600 dark:text-slate-400">Performance:</span>
+										<p class="text-sm text-slate-700 dark:text-slate-300 mt-1">{study.result.performance}</p>
+									</div>
+									<div>
+										<span class="text-xs font-medium text-slate-600 dark:text-slate-400">UX:</span>
+										<p class="text-sm text-slate-700 dark:text-slate-300 mt-1">{study.result.ux}</p>
+									</div>
+									<div>
+										<span class="text-xs font-medium text-slate-600 dark:text-slate-400">Feedback:</span>
+										<p class="text-sm text-slate-700 dark:text-slate-300 mt-1">{study.result.feedback}</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</article>
+				))}
+			</div>
+		</section>
+
+		{/* Optional: Notes/Writing section - Uncomment if you have blog/notes */}
+		{/* <section>
+			<h2>Notes</h2>
+			<p class="mt-2 text-slate-600 dark:text-slate-400">
+				Thoughts and lessons learned from building projects.
+			</p>
+			<div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+				{notes.map((note) => (
+					<a
+						href={note.link}
+						class="group block rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/50 p-4 hover:border-slate-300 dark:hover:border-slate-600 hover:shadow-sm transition-all">
+						<h3 class="font-semibold text-slate-900 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 mb-2">
+							{note.title}
+						</h3>
+						<p class="text-sm text-slate-600 dark:text-slate-400 mb-2 line-clamp-2">
+							{note.description}
+						</p>
+						<span class="text-xs text-slate-500 dark:text-slate-500">
+							{new Date(note.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+						</span>
+					</a>
+				))}
+			</div>
+		</section> */}
+
+		<section>
+			<h2>Let's build something together</h2>
+			<p class="mt-2 text-slate-600 dark:text-slate-400">
+				I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+			</p>
+			<div class="mt-6 flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+				<div class="flex items-center gap-2">
+					<a
+						href={`mailto:${contactInfo.email}`}
+						class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 font-medium hover:bg-slate-800 dark:hover:bg-slate-200 transition-colors">
+						<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+						</svg>
+						{contactInfo.email}
+					</a>
+					<button
+						id="copy-email-btn"
+						data-email={contactInfo.email}
+						class="inline-flex items-center justify-center w-12 h-12 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-300 hover:border-slate-300 dark:hover:border-slate-600 transition-colors"
+						title="Copy email">
+						<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+						</svg>
+					</button>
+				</div>
+				<div class="flex gap-4">
+					<a
+						href={contactInfo.github}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="inline-flex items-center gap-2 px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-300 hover:border-slate-300 dark:hover:border-slate-600 transition-colors">
+						<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+						</svg>
+						GitHub
+					</a>
+					<a
+						href={contactInfo.linkedin}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="inline-flex items-center gap-2 px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/50 text-slate-700 dark:text-slate-300 hover:border-slate-300 dark:hover:border-slate-600 transition-colors">
+						<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+						</svg>
+						LinkedIn
+					</a>
 				</div>
 			</div>
 		</section>
@@ -267,9 +641,38 @@ const projects = [
 	}
 	.timeline-line(not:last-child)::after{
 		position: absolute;
-		left: 24px;
+		left: 32px;
 		top: 12px;
 		height: 100px;
 		width: 1px;
 	}
 </style>
+
+<script>
+	// Copy email functionality
+	document.addEventListener('DOMContentLoaded', () => {
+		const copyBtn = document.getElementById('copy-email-btn');
+		if (copyBtn) {
+			copyBtn.addEventListener('click', async () => {
+				const email = copyBtn.getAttribute('data-email');
+				if (!email) return;
+				try {
+					await navigator.clipboard.writeText(email);
+					const originalHTML = copyBtn.innerHTML;
+					copyBtn.innerHTML = `
+						<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+						</svg>
+					`;
+					copyBtn.classList.add('text-green-600', 'dark:text-green-400');
+					setTimeout(() => {
+						copyBtn.innerHTML = originalHTML;
+						copyBtn.classList.remove('text-green-600', 'dark:text-green-400');
+					}, 2000);
+				} catch (err) {
+					console.error('Failed to copy:', err);
+				}
+			});
+		}
+	});
+</script>
