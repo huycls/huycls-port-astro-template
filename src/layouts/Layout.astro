@@ -3,7 +3,7 @@ import Navbar from "../components/organisms/Navbar.astro"
 import {StaggeredMenu} from "@/components/organisms/StaggeredMenu";
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
 import "../styles/global.css";
-
+import DockWithItems from "@/components/ui/DockWithItems"
 
 const menuItems = [
   { label: 'Home', ariaLabel: 'Go to home page', link: '/' },
@@ -42,6 +42,7 @@ const socialItems = [
 		</script>
 	</head>
 	<body>
+		<DockWithItems client:load />
 		<slot />
 		<footer class="max-w-4xl mx-auto px-10 py-6 mt-12 mb-8 text-center text-sm text-slate-600 dark:text-slate-400 border-t border-slate-200 dark:border-slate-700">
 			<div class="flex flex-col sm:flex-row items-center justify-between gap-4">

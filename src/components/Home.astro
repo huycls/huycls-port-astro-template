@@ -3,7 +3,10 @@ import astroLogo from '../assets/astro.svg';
 import background from '../assets/background.svg';
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler"
 import {StaggeredMenu} from "@/components/organisms/StaggeredMenu";
-import { TimeDisplay } from "@/components/ui/TimeDisplay"; 
+import { TimeDisplay } from "@/components/ui/TimeDisplay";
+import { SkillsSection } from "@/components/ui/SkillsSection"; 
+import LogoLoop from "@/components/molecules/LogoLoop"
+
 
 const menuItems = [
   { label: 'Home', ariaLabel: 'Go to home page', link: '/' },
@@ -45,6 +48,7 @@ const contactInfo = {
 	github: "https://github.com/yourusername",
 	linkedin: "https://linkedin.com/in/yourusername"
 };
+
 
 const caseStudies = [
 	{
@@ -105,42 +109,15 @@ const jobsList = [
 ]
 
 const skills = [
-	{
-		category: "Frontend",
-		items: [
-			{ name: "React", description: "Component-based UI library" },
-			{ name: "Next.js", description: "React framework for production" },
-			{ name: "TypeScript", description: "Typed JavaScript" },
-			{ name: "TailwindCSS", description: "Utility-first CSS framework" },
-			{ name: "CSS Modules", description: "Scoped CSS styling" },
-		],
-	},
-	{
-		category: "State / Data",
-		items: [
-			{ name: "Redux", description: "State management library" },
-			{ name: "React Query", description: "Server state management" },
-			{ name: "SWR", description: "Data fetching & caching" },
-		],
-	},
-	{
-		category: "Tooling",
-		items: [
-			{ name: "Git", description: "Version control" },
-			{ name: "Vite", description: "Build tool & dev server" },
-			{ name: "ESLint", description: "Code linting" },
-			{ name: "Prettier", description: "Code formatting" },
-			{ name: "Figma", description: "Design collaboration" },
-		],
-	},
-	{
-		category: "Quality",
-		items: [
-			{ name: "Performance optimization", description: "Fast & efficient apps" },
-			{ name: "Responsive design", description: "Mobile-first approach" },
-			{ name: "Accessibility (a11y)", description: "Inclusive user experience" },
-		],
-	},
+	{ name: "React" },
+	{ name: "Next.js" },
+	{ name: "TypeScript" },
+	{ name: "TailwindCSS" },
+	{ name: "Redux" },
+	{ name: "SWR" },
+	{ name: "GitHub" },
+	{ name: "Expressjs" },
+	{ name: "MongoDB" }
 ];
 
 const projects = [
@@ -224,10 +201,14 @@ const projects = [
 
 
 
+
+
+
 ---
+
 <div class="relative h-full">
   <AnimatedThemeToggler client:load  />
-	
+
 <div id="container" class="absolute inset-0 w-full h-full">
 	<img id="background" src={background.src} alt="" fetchpriority="high" />
 	<main class="max-w-4xl p-10 mx-auto my-20 light:text-[#333333] dark:text-white dark:bg-[#0d1117] bg-white rounded-xl overflow-hidden relative">
@@ -256,49 +237,21 @@ const projects = [
 			<p class="mt-6">I am a Full-Stack Developer dedicated to building scalable, high-performance web applications. My expertise lies in the Next.js and React ecosystem, where I create seamless user interfaces paired with robust backends using Node.js and Express. By leveraging MongoDB for flexible data management, I build end-to-end solutions that are not just functional, but optimized for growth and user experience.</p>
 		</section>
 		<section>
-			<h2>Skills</h2>
-			<div class="mt-6 space-y-8">
-				{skills.map((group) => (
-					<div class="skills-group">
-						<h3 class="text-lg font-semibold text-slate-900 dark:text-slate-100 mb-4">
-							{group.category}
-						</h3>
-						<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-							{group.items.map((skill) => (
-								<div class="skills-item group flex items-start gap-3 p-4 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/50 hover:border-slate-300 dark:hover:border-slate-600 hover:shadow-sm transition-all">
-									<div class="skills-icon flex-shrink-0 w-10 h-10 rounded-lg bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-lg group-hover:bg-slate-200 dark:group-hover:bg-slate-600 transition-colors">
-										{skill.name === "React" && "⚛️"}
-										{skill.name === "Next.js" && "▲"}
-										{skill.name === "TypeScript" && "📘"}
-										{skill.name === "TailwindCSS" && "🎨"}
-										{skill.name === "CSS Modules" && "💅"}
-										{skill.name === "Redux" && "🔄"}
-										{skill.name === "React Query" && "🔍"}
-										{skill.name === "SWR" && "⚡"}
-										{skill.name === "Git" && "📦"}
-										{skill.name === "Vite" && "⚡"}
-										{skill.name === "ESLint" && "🔍"}
-										{skill.name === "Prettier" && "✨"}
-										{skill.name === "Figma" && "🎨"}
-										{skill.name === "Performance optimization" && "🚀"}
-										{skill.name === "Responsive design" && "📱"}
-										{skill.name === "Accessibility (a11y)" && "♿"}
-										{!["React", "Next.js", "TypeScript", "TailwindCSS", "CSS Modules", "Redux", "React Query", "SWR", "Git", "Vite", "ESLint", "Prettier", "Figma", "Performance optimization", "Responsive design", "Accessibility (a11y)"].includes(skill.name) && "💼"}
-									</div>
-									<div class="flex-1 min-w-0">
-										<h4 class="font-medium text-slate-900 dark:text-slate-100 text-sm mb-1">
-											{skill.name}
-										</h4>
-										<p class="text-xs text-slate-600 dark:text-slate-400">
-											{skill.description}
-										</p>
-									</div>
-								</div>
-							))}
-						</div>
-					</div>
-				))}
-			</div>
+			<LogoLoop
+			client:load
+			speed={120}
+			direction="left"
+			logoHeight={48}
+			gap={40}
+			hoverSpeed={0}
+			scaleOnHover
+			fadeOut
+			fadeOutColor="rgba(255,255,255,0.1)"
+			ariaLabel="Technology partners"
+      		/>
+	  	</section>
+		<section>
+			<SkillsSection client:load skills={skills} initialVisible={9} />
 		</section>
 		<section>
 			<h2>Work Experience</h2>

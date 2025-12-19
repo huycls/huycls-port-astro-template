@@ -104,7 +104,7 @@ export default function Dock({
   items,
   className = "",
   spring = { mass: 0.1, stiffness: 150, damping: 12 },
-  magnification = 70,
+  magnification = 50,
   distance = 200,
   panelHeight = 68,
   dockHeight = 256,
@@ -114,8 +114,8 @@ export default function Dock({
   const isHovered = useMotionValue(0);
 
   const maxHeight = useMemo(
-    () => Math.max(dockHeight, magnification + magnification / 2 + 4),
-    [magnification, dockHeight]
+    () => Math.max(panelHeight + 20, magnification + 10),
+    [magnification, panelHeight]
   );
   const heightRow = useTransform(isHovered, [0, 1], [panelHeight, maxHeight]);
   const height = useSpring(heightRow, spring);
@@ -133,7 +133,7 @@ export default function Dock({
           isHovered.set(0);
           mouseX.set(Infinity);
         }}
-        className={`dock-panel ${className}`}
+        className={`dock-panel z-10 ${className}`}
         style={{ height: panelHeight }}
         role="toolbar"
         aria-label="Application dock">
