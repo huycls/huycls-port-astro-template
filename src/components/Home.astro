@@ -6,6 +6,7 @@ import {StaggeredMenu} from "@/components/organisms/StaggeredMenu";
 import { TimeDisplay } from "@/components/ui/TimeDisplay";
 import { SkillsSection } from "@/components/ui/SkillsSection"; 
 import LogoLoop from "@/components/molecules/LogoLoop"
+import BentoGrid from "@/components/organisms/BentoGrid";
 
 
 const menuItems = [
@@ -88,22 +89,38 @@ const caseStudies = [
 const jobsList = [
 	{
 		name: "Gleads",
-		role: "Frontend Developer",
-		time: "2022 - Now",
-		bullets: [
-			"Built scalable Next.js applications with TypeScript, Redux, and TailwindCSS",
-			"Optimized performance reducing load time by 40% through code splitting and lazy loading",
-			"Improved UX with responsive design and accessibility (WCAG 2.1 AA compliance)"
+		location: "Ho Chi Minh, Vietnam",
+		totalTime: "Oct 2021 – Today · 4 years 3 months",
+		roles: [
+			{
+				title: "Senior Frontend Developer",
+				time: "Oct 2025 – Today · 3 months",
+				isCurrent: true
+			},
+			{
+				title: "Frontend Developer",
+				time: "Jan 2025 – Sep 2025 · 9 months",
+				isCurrent: false
+			},
+			{
+				title: "Frontend Developer",
+				time: "Oct 2021 – Dec 2024 · 3 years 3 months",
+				badge: "Part-time",
+				isCurrent: false
+			}
 		]
 	},
 	{
 		name: "Thanh Tin Tech",
-		role: "Frontend Developer",
-		time: "2020 - 2022",
-		bullets: [
-			"Developed React-based web applications with modern state management",
-			"Solved complex UI/UX challenges improving user engagement by 25%",
-			"Scaled applications to handle 10K+ concurrent users with optimized rendering"
+		location: "Ho Chi Minh, Vietnam",
+		totalTime: "Nov 2020 – Dec 2020 · 2 months",
+		roles: [
+			{
+				title: "Software Developer",
+				time: "Nov 2020 – Dec 2020 · 2 months",
+				badge: "Internship",
+				isCurrent: false
+			}
 		]
 	}
 ]
@@ -208,7 +225,6 @@ const projects = [
 
 <div class="relative h-full">
   <AnimatedThemeToggler client:load  />
-
 <div id="container" class="absolute inset-0 w-full h-full">
 	<img id="background" src={background.src} alt="" fetchpriority="high" />
 	<main class="max-w-4xl p-10 mx-auto my-20 light:text-[#333333] dark:text-white dark:bg-[#0d1117] bg-white rounded-xl overflow-hidden relative">
@@ -227,8 +243,8 @@ const projects = [
 					</div>				
 				</div>
 				<div class="flex-none">
-				<div class="rounded-lg p-4 border border-slate-400 w-[200px] h-auto">
-				<img src="/avatar-me-port.jpg" alt="avatar" class="rounded-lg" /></div>
+				<div class="rounded-lg rotate-[3deg] drop-shadow-2xl w-[200px] h-auto">
+				 <img src="/avatar-me-port.jpg" alt="avatar" class="rounded-lg" /></div>
 				</div>
 			</div>
 		</section>
@@ -251,204 +267,55 @@ const projects = [
       		/>
 	  	</section>
 		<section>
-			<SkillsSection client:load skills={skills} initialVisible={9} />
+			<BentoGrid />
 		</section>
 		<section>
-			<h2>Work Experience</h2>
-			<div class="mt-6 relative pl-8 border-l-2 border-slate-200 dark:border-slate-700">
-				{jobsList?.map((item, index) => (
-					<div class="relative mb-8 last:mb-0">
-						<div class="absolute -left-[29px] top-1 w-4 h-4 rounded-full bg-white dark:bg-[#06d51b] border-2 border-slate-300 dark:border-slate-600"></div>
-						<div class="pl-6">
-							<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2">
-								<h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100">
-									{item.name}
-								</h3>
-								<span class="text-sm text-slate-500 dark:text-slate-400 font-medium">
-									{item.time}
-								</span>
-							</div>
-							<p class="text-slate-600 dark:text-slate-400 mb-4">
-								{item.role}
+			<h2 class="text-2xl font-semibold text-slate-900 dark:text-slate-100 text-center">Experience</h2>
+			<div class="mt-6 space-y-8 flex flex-col items-center justify-center">
+				{jobsList?.map((company, companyIndex) => (
+					<div class="relative">
+						<div class="mb-4">
+							<h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100 underline">
+								{company.name}
+							</h3>
+							<p class="text-sm text-slate-500 dark:text-slate-400 mt-1">
+								{company.location}
 							</p>
-							<ul class="space-y-2">
-								{item.bullets.map((bullet) => (
-									<li class="flex items-start gap-2 text-slate-700 dark:text-slate-300">
-										<span class="text-slate-400 dark:text-slate-500 mt-1.5">•</span>
-										<span>{bullet}</span>
-									</li>
-								))}
-							</ul>
+							<p class="text-sm text-slate-500 dark:text-slate-400">
+								{company.totalTime}
+							</p>
+						</div>
+						<div class="relative pl-8 before:content-[''] before:absolute before:left-[10px] before:top-1 before:w-[1px] before:h-full  before:bg-slate-300 before:dark:bg-slate-600">
+							{company.roles.map((role, roleIndex) => (
+								<div class="relative mb-6 last:mb-0">
+									<div class={`absolute -left-[29px] top-1 w-4 h-4 rounded-full border-2 ${
+										role.isCurrent 
+											? 'bg-[#06d51b] dark:bg-[#06d51b] border-[#06d51b]' 
+											: 'bg-white dark:bg-slate-600 border-slate-300 dark:border-slate-600'
+									}`}></div>
+									<div class="pl-6">
+										<div class="flex flex-col sm:flex-row sm:items-center gap-2 mb-1">
+											<h4 class="text-lg font-semibold text-slate-900 dark:text-slate-100">
+												{role.title}
+											</h4>
+											{role.badge && (
+												<span class="text-sm text-slate-500 dark:text-slate-400">
+													{role.badge}
+												</span>
+											)}
+										</div>
+										<p class="text-sm text-slate-500 dark:text-slate-400">
+											{role.time}
+										</p>
+									</div>
+								</div>
+							))}
 						</div>
 					</div>
 				))}
 			</div>
 		</section>
-		<section>
-			<h2>Projects</h2>
-			<div class="mt-6 grid gap-4 sm:grid-cols-2">
-				{projects.map((project) => {
-					const techTags = project.techUsed
-						.split(',')
-						.map((tag) => tag.trim().replace('#', ''));
-					return (
-						<div class="github-project-card group block rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/50 overflow-hidden transition-all hover:border-slate-300 dark:hover:border-slate-600 hover:shadow-md">
-							<div class="github-project-thumbnail">
-								<img
-									src={project.listImages[0].src}
-									alt={project.listImages[0].alt}
-									class="w-full h-48 object-cover"
-									loading="lazy"
-								/>
-							</div>
-							<div class="p-4">
-								<div class="flex items-start justify-between gap-2 mb-2">
-									<h3 class="github-project-title font-semibold text-lg text-slate-900 dark:text-slate-100">
-										{project.name}
-									</h3>
-								</div>
-								<p class="github-project-description text-sm text-slate-600 dark:text-slate-400 line-clamp-2 mb-3">
-									{project.description}
-								</p>
-								<div class="flex flex-wrap gap-1.5 mb-4">
-									{techTags.map((tag) => (
-										<span class="github-project-tag inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">
-											{tag}
-										</span>
-									))}
-								</div>
-								<div class="flex gap-2 pt-2 border-t border-slate-200 dark:border-slate-700">
-									{project.liveDemo && (
-										<a
-											href={project.liveDemo}
-											target="_blank"
-											rel="noopener noreferrer"
-											class="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium rounded-lg bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-200 transition-colors">
-											<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-											</svg>
-											Live demo
-										</a>
-									)}
-									{project.github && (
-										<a
-											href={project.github}
-											target="_blank"
-											rel="noopener noreferrer"
-											class="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:border-slate-300 dark:hover:border-slate-600 transition-colors">
-											<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-												<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-											</svg>
-											GitHub
-										</a>
-									)}
-								</div>
-							</div>
-						</div>
-					);
-				})}
-			</div>
-		</section>
-
-		<section>
-			<h2>Case Studies</h2>
-			<p class="mt-2 text-slate-600 dark:text-slate-400">
-				Deep dive into how I approach problems, make technical decisions, and deliver results.
-			</p>
-			<div class="mt-6 space-y-8">
-				{caseStudies.map((study, index) => (
-					<article class="case-study-card rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/50 p-6 hover:border-slate-300 dark:hover:border-slate-600 hover:shadow-lg transition-all">
-						<h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100 mb-6">
-							{study.title}
-						</h3>
-						
-						<div class="space-y-6">
-							<div>
-								<h4 class="text-sm font-semibold text-slate-900 dark:text-slate-100 mb-2 flex items-center gap-2">
-									<span class="case-study-icon">📋</span>
-									Context
-								</h4>
-								<p class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
-									{study.context}
-								</p>
-							</div>
-
-							<div>
-								<h4 class="text-sm font-semibold text-slate-900 dark:text-slate-100 mb-2 flex items-center gap-2">
-									<span class="case-study-icon">💡</span>
-									Solution
-								</h4>
-								<p class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
-									{study.solution}
-								</p>
-							</div>
-
-							<div>
-								<h4 class="text-sm font-semibold text-slate-900 dark:text-slate-100 mb-3 flex items-center gap-2">
-									<span class="case-study-icon">⚙️</span>
-									Tech Choices
-								</h4>
-								<ul class="space-y-2">
-									{study.techChoices.map((choice) => (
-										<li class="text-sm text-slate-700 dark:text-slate-300">
-											<span class="font-medium text-slate-900 dark:text-slate-100">{choice.tech}:</span>
-											<span class="ml-2">{choice.reason}</span>
-										</li>
-									))}
-								</ul>
-							</div>
-
-							<div>
-								<h4 class="text-sm font-semibold text-slate-900 dark:text-slate-100 mb-3 flex items-center gap-2">
-									<span class="case-study-icon">📊</span>
-									Result
-								</h4>
-								<div class="space-y-2">
-									<div>
-										<span class="text-xs font-medium text-slate-600 dark:text-slate-400">Performance:</span>
-										<p class="text-sm text-slate-700 dark:text-slate-300 mt-1">{study.result.performance}</p>
-									</div>
-									<div>
-										<span class="text-xs font-medium text-slate-600 dark:text-slate-400">UX:</span>
-										<p class="text-sm text-slate-700 dark:text-slate-300 mt-1">{study.result.ux}</p>
-									</div>
-									<div>
-										<span class="text-xs font-medium text-slate-600 dark:text-slate-400">Feedback:</span>
-										<p class="text-sm text-slate-700 dark:text-slate-300 mt-1">{study.result.feedback}</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</article>
-				))}
-			</div>
-		</section>
-
-		{/* Optional: Notes/Writing section - Uncomment if you have blog/notes */}
-		{/* <section>
-			<h2>Notes</h2>
-			<p class="mt-2 text-slate-600 dark:text-slate-400">
-				Thoughts and lessons learned from building projects.
-			</p>
-			<div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-				{notes.map((note) => (
-					<a
-						href={note.link}
-						class="group block rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/50 p-4 hover:border-slate-300 dark:hover:border-slate-600 hover:shadow-sm transition-all">
-						<h3 class="font-semibold text-slate-900 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 mb-2">
-							{note.title}
-						</h3>
-						<p class="text-sm text-slate-600 dark:text-slate-400 mb-2 line-clamp-2">
-							{note.description}
-						</p>
-						<span class="text-xs text-slate-500 dark:text-slate-500">
-							{new Date(note.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-						</span>
-					</a>
-				))}
-			</div>
-		</section> */}
-
+		
 		<section>
 			<h2>Let's build something together</h2>
 			<p class="mt-2 text-slate-600 dark:text-slate-400">
@@ -592,7 +459,7 @@ const projects = [
 	.timeline-line{
 		position:relative;
 	}
-	.timeline-line(not:last-child)::after{
+	.timeline-line:not(:last-child)::after{
 		position: absolute;
 		left: 32px;
 		top: 12px;
@@ -600,7 +467,6 @@ const projects = [
 		width: 1px;
 	}
 </style>
-
 <script>
 	// Copy email functionality
 	document.addEventListener('DOMContentLoaded', () => {
