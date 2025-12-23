@@ -556,9 +556,7 @@ export const StaggeredMenu = ({
     </div>
   );
 };
-
 export default StaggeredMenu;
-
 {
   /* <StaggeredMenu 
 		client:load
